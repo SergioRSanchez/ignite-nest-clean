@@ -1,10 +1,17 @@
 import { Module } from '@nestjs/common'
+import { ConfigModule } from '@nestjs/config'
 import { PrismaService } from './prisma/prisma.service'
 import { CreateAccountController } from './controllers/create-account.controller'
+import { envSchema } from './env'
 
 @Module({
   // Importar mais módulos
-  imports: [],
+  imports: [
+    ConfigModule.forRoot({
+      validate: (env) => envSchema.parse(env),
+      isGlobal: true,
+    }),
+  ],
   // Controllers é tudo que recebe requisição http
   controllers: [CreateAccountController],
   // Providers é todo o "resto", tudo que vai precisar injetar em outras classes
