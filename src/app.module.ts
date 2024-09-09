@@ -5,6 +5,7 @@ import { CreateAccountController } from './controllers/create-account.controller
 import { envSchema } from './env'
 import { AuthModule } from './auth/auth.module'
 import { AuthenticateController } from './controllers/authenticate.controller'
+import { CreateQuestionController } from './controllers/create-question.controller'
 
 @Module({
   // Importar mais módulos
@@ -16,9 +17,13 @@ import { AuthenticateController } from './controllers/authenticate.controller'
     AuthModule,
   ],
   // Controllers é tudo que recebe requisição http
-  controllers: [CreateAccountController, AuthenticateController],
+  controllers: [
+    CreateAccountController,
+    AuthenticateController,
+    CreateQuestionController,
+  ],
   // Providers é todo o "resto", tudo que vai precisar injetar em outras classes
   // exemplo, uma classe que é um repositório do banco de dados, classe que é um caso de uso, classe que faz envio de email, e por aí vai
   providers: [PrismaService],
 })
-export class AppModule {}
+export class AppModule { }
