@@ -26,4 +26,4 @@ import { CreateQuestionController } from './controllers/create-question.controll
   // exemplo, uma classe que é um repositório do banco de dados, classe que é um caso de uso, classe que faz envio de email, e por aí vai
   providers: [PrismaService],
 })
-export class AppModule { }
+export class AppModule {}
