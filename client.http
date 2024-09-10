@@ -21,6 +21,7 @@ Content-Type: application/json
   "email": "sergio@email.com",
   "password": "123456"
 }
+
 ###
 
 # @name create_question
@@ -29,6 +30,13 @@ Content-Type: application/json
 Authorization: Bearer {{authToken}}
 
 {
-  "title": "New title",
-  "content": "New content"
+  "title": "New title 2",
+  "content": "New content 2"
 }
+
+###
+
+# @name fetch_recent_questions
+GET {{baseUrl}}/questions?page=1
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
