@@ -1,12 +1,9 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
-import { PrismaService } from './prisma/prisma.service'
-import { CreateAccountController } from '@/infra/http/controllers/create-account.controller'
+
 import { envSchema } from './env'
 import { AuthModule } from './auth/auth.module'
-import { AuthenticateController } from '@/infra/http/controllers/authenticate.controller'
-import { CreateQuestionController } from '@/infra/http/controllers/create-question.controller'
-import { FetchRecentQuestionsController } from '@/infra/http/controllers/fetch-recent-questions.controller'
+import { HttpModule } from './http/http.module'
 
 @Module({
   // Importar mais módulos
@@ -16,16 +13,7 @@ import { FetchRecentQuestionsController } from '@/infra/http/controllers/fetch-r
       isGlobal: true,
     }),
     AuthModule,
+    HttpModule,
   ],
-  // Controllers é tudo que recebe requisição http
-  controllers: [
-    CreateAccountController,
-    AuthenticateController,
-    CreateQuestionController,
-    FetchRecentQuestionsController,
-  ],
-  // Providers é todo o "resto", tudo que vai precisar injetar em outras classes
-  // exemplo, uma classe que é um repositório do banco de dados, classe que é um caso de uso, classe que faz envio de email, e por aí vai
-  providers: [PrismaService],
 })
 export class AppModule {}
