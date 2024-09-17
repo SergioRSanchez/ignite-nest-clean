@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { PrismaService } from './prisma/prisma.service'
-import { CreateAccountController } from './controllers/create-account.controller'
+import { CreateAccountController } from '@/infra/http/controllers/create-account.controller'
 import { envSchema } from './env'
 import { AuthModule } from './auth/auth.module'
-import { AuthenticateController } from './controllers/authenticate.controller'
-import { CreateQuestionController } from './controllers/create-question.controller'
-import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller'
+import { AuthenticateController } from '@/infra/http/controllers/authenticate.controller'
+import { CreateQuestionController } from '@/infra/http/controllers/create-question.controller'
+import { FetchRecentQuestionsController } from '@/infra/http/controllers/fetch-recent-questions.controller'
 
 @Module({
   // Importar mais módulos

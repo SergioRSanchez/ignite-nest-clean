@@ -2,12 +2,12 @@ import request from 'supertest'
 
 import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
-import { PrismaService } from '@/prisma/prisma.service'
+import { PrismaService } from '@/infra/prisma/prisma.service'
 
-import { AppModule } from '@/app.module'
+import { AppModule } from '@/infra/app.module'
 import { JwtService } from '@nestjs/jwt'
 
-describe('Fetch recent questions (E2E)', () => {
+describe('Create question (E2E)', () => {
   let app: INestApplication
   let prisma: PrismaService
   let jwt: JwtService
@@ -25,7 +25,7 @@ describe('Fetch recent questions (E2E)', () => {
     await app.init()
   })
 
-  test('[GET] /questions', async () => {
+  test('[POST] /questions', async () => {
     const user = await prisma.user.create({
       data: {
         name: 'John Doe',
@@ -36,34 +36,22 @@ describe('Fetch recent questions (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id })
 
-    await prisma.question.createMany({
-      data: [
-        {
-          title: 'Question 01',
-          content: 'Content 01',
-          slug: 'question-01',
-          authorId: user.id,
-        },
-        {
-          title: 'Question 02',
-          content: 'Content 02',
-          slug: 'question-02',
-          authorId: user.id,
-        },
-      ],
-    })
-
     const response = await request(app.getHttpServer())
-      .get('/questions')
+      .post('/questions')
       .set('Authorization', `Bearer ${accessToken}`)
-      .send()
+      .send({
+        title: 'New Title',
+        content: 'Question Content',
+      })
 
-    expect(response.statusCode).toBe(200)
-    expect(response.body).toEqual({
-      questions: [
-        expect.objectContaining({ title: 'Question 01' }),
-        expect.objectContaining({ title: 'Question 02' }),
-      ],
+    expect(response.statusCode).toBe(201)
+
+    const questionOnDataBase = await prisma.question.findFirst({
+      where: {
+        title: 'New Title',
+      },
     })
+
+    expect(questionOnDataBase).toBeTruthy()
   })
 })
