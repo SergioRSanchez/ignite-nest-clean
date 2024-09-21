@@ -7,13 +7,17 @@ import { PrismaQuestionAttachmentsRepository } from './prisma/repositories/prism
 import { PrismaAnswersRepository } from './prisma/repositories/prisma-answers-repository'
 import { PrismaAnswerCommentsRepository } from './prisma/repositories/prisma-answer-comments-repository'
 import { PrismaAnswerAttachmentsRepository } from './prisma/repositories/prisma-answer-attachments-repository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 
 @Module({
   // Providers é todo o "resto", tudo que vai precisar injetar em outras classes
   // exemplo, uma classe que é um repositório do banco de dados, classe que é um caso de uso, classe que faz envio de email, e por aí vai
   providers: [
     PrismaService,
-    PrismaQuestionsRepository,
+    {
+      provide: QuestionsRepository,
+      useClass: PrismaQuestionsRepository,
+    },
     PrismaQuestionCommentsRepository,
     PrismaQuestionAttachmentsRepository,
     PrismaAnswersRepository,
@@ -22,7 +26,7 @@ import { PrismaAnswerAttachmentsRepository } from './prisma/repositories/prisma-
   ],
   exports: [
     PrismaService,
-    PrismaQuestionsRepository,
+    QuestionsRepository,
     PrismaQuestionCommentsRepository,
     PrismaQuestionAttachmentsRepository,
     PrismaAnswersRepository,
