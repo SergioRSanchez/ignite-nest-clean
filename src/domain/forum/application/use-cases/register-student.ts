@@ -24,7 +24,7 @@ export class RegisterStudentUseCase {
   constructor(
     private studentsRepository: StudentsRepository,
     private hashGenerator: HashGenerator,
-  ) { }
+  ) {}
 
   async execute({
     name,
