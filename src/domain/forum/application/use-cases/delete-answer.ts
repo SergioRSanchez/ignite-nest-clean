@@ -1,7 +1,9 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
-import { AnswersRepository } from '../repositories/answers-repository'
 import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found-error'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
+import { AnswersRepository } from '../repositories/answers-repository'
 
 interface DeleteAnswerUseCaseRequest {
   authorId: string
@@ -11,9 +13,9 @@ interface DeleteAnswerUseCaseRequest {
 // eslint-disable-next-line prettier/prettier
 type DeleteAnswerUseCaseResponse = Either<ResourceNotFoundError | NotAllowedError, null>
 
+@Injectable()
 export class DeleteAnswerUseCase {
-  // eslint-disable-next-line prettier/prettier
-  constructor(private answersRepository: AnswersRepository) { }
+  constructor(private answersRepository: AnswersRepository) {}
 
   async execute({
     authorId,
