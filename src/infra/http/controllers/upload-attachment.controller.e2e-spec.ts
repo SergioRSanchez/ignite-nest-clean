@@ -35,8 +35,13 @@ describe('Upload attachments (E2E)', () => {
     const response = await request(app.getHttpServer())
       .post('/attachments')
       .set('Authorization', `Bearer ${accessToken}`)
-      .attach('file', './test/e2e/sample-upload.jpg')
+      .attach('file', './test/e2e/sample-upload.jpeg')
+
+    console.log(response)
 
     expect(response.statusCode).toBe(201)
+    expect(response.body).toEqual({
+      attachmentId: expect.any(String),
+    })
   })
 })
