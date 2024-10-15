@@ -5,7 +5,7 @@ export interface CommentWithAuthorProps {
   commentId: UniqueEntityID
   content: string
   authorId: string
-  authorName: string
+  author: UniqueEntityID
   createdAt: Date
   updatedAt?: Date | null
 }
@@ -23,8 +23,8 @@ export class CommentWithAuthor extends ValueObject<CommentWithAuthorProps> {
     return this.props.authorId
   }
 
-  get authorName() {
-    return this.props.authorName
+  get author() {
+    return this.props.author
   }
 
   get createdAt() {
