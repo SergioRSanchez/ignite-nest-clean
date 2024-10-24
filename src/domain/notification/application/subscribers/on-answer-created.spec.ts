@@ -1,7 +1,7 @@
 import { MockInstance } from 'vitest'
 
 import { makeAnswer } from 'test/factories/make-answer'
-import { OnAnswerCreated } from './on-anwer-created'
+import { OnAnswerCreated } from './on-answer-created'
 import { InMemoryAnswersRepository } from 'test/repositories/in-memory-answers-repository'
 import { InMemoryAnswerAttachmentsRepository } from 'test/repositories/in-memory-answer-attachments-repository'
 import { InMemoryQuestionsRepository } from 'test/repositories/in-memory-questions-repository'
