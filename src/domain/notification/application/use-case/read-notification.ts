@@ -1,3 +1,5 @@
+import { Injectable } from '@nestjs/common'
+
 import { Either, left, right } from '@/core/either'
 import { Notification } from '../../enterprise/entities/notification'
 import { NotificationsRepository } from '../repositories/notifications-repository'
@@ -16,9 +18,9 @@ type ReadNotificationUseCaseResponse = Either<
   }
 >
 
+@Injectable()
 export class ReadNotificationUseCase {
-  // eslint-disable-next-line prettier/prettier
-  constructor(private notificationsRepository: NotificationsRepository) { }
+  constructor(private notificationsRepository: NotificationsRepository) {}
 
   async execute({
     recipientId,
