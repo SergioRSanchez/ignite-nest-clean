@@ -10,6 +10,7 @@ import { DatabaseModule } from '@/infra/database/database.module'
 import { StudentFactory } from 'test/factories/make-student'
 import { QuestionFactory } from 'test/factories/make-question'
 import { waitFor } from 'test/utils/wait-for'
+import { DomainEvents } from '@/core/events/domain-events'
 
 describe('On answer created (E2E)', () => {
   let app: INestApplication
@@ -31,6 +32,8 @@ describe('On answer created (E2E)', () => {
     questionFactory = moduleRef.get(QuestionFactory)
 
     jwt = moduleRef.get(JwtService)
+
+    DomainEvents.shouldRun = true
 
     await app.init()
   })
