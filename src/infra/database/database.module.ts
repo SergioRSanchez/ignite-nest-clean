@@ -22,9 +22,12 @@ import { PrismaAnswerAttachmentsRepository } from './prisma/repositories/prisma-
 import { PrismaAttachmentsRepository } from './prisma/repositories/prisma-attachments-repository'
 import { PrismaNotificationRepository } from './prisma/repositories/prisma-notification-repository'
 
+import { CacheModule } from '../cache/cache.module'
+
 @Module({
   // Providers é todo o "resto", tudo que vai precisar injetar em outras classes
   // exemplo, uma classe que é um repositório do banco de dados, classe que é um caso de uso, classe que faz envio de email, e por aí vai
+  imports: [CacheModule],
   providers: [
     PrismaService,
     {
